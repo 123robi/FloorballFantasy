@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
-from django.http import Http404
-from rest_framework import viewsets, permissions, status, generics, mixins
+from rest_framework import permissions, generics, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
