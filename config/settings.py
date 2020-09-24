@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Django REST framework
     'rest_framework',
     'rest_framework.authtoken',
+    'teams.apps.TeamsConfig',
     # CORS
     'corsheaders',
 ]

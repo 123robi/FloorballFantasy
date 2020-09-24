@@ -9,4 +9,8 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'name')
 
     def create(self, validated_data):
-        return Team.objects.create_user(**validated_data)
+        return Team.objects.create(**validated_data)
+
+    def validate(self, attrs):
+        attrs['user'] = self.context['request'].user
+        return attrs
