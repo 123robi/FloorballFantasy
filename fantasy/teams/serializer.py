@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from teams.models import Team
+from fantasy.teams.models import Team
 
 
 class TeamSerializer(serializers.HyperlinkedModelSerializer):

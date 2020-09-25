@@ -3,7 +3,7 @@ from rest_framework import permissions, generics, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from users.serializer import UserSerializer
+from fantasy.users.serializer import UserSerializer
 
 
 class UserViewSet(mixins.CreateModelMixin, generics.GenericAPIView):

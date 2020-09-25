@@ -2,9 +2,9 @@ from rest_framework import generics, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from teams.models import Team
-from teams.serializer import TeamSerializer
-from users.premissions import IsOwner
+from fantasy.teams.models import Team
+from fantasy.teams.serializer import TeamSerializer
+from fantasy.users.premissions import IsOwner
 
 
 class TeamViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, generics.GenericAPIView):
