@@ -8,3 +8,4 @@ class FloorballTeam(models.Model):
     wins_after_over_time = models.PositiveIntegerField()
     loses_after_over_time = models.PositiveIntegerField()
     points = models.PositiveIntegerField()
+    image_url = models.URLField(default='')

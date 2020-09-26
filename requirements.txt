@@ -1,2 +1,12 @@
 Django~=3.1.1
 djangorestframework==3.11.1
+django-cors-headers==3.5.0
+flake8==3.8.3
+pre-commit==2.7.1
+psycopg2==2.8.6
+redis==3.5.3
+celery==5.0.0
+beautifulsoup4==4.9.1
+requests==2.24.0
+
+
