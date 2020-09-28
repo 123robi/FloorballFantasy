@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'fantasy.teams.apps.TeamsConfig',
     'fantasy.floorball_teams.apps.FloorballTeamsConfig',
+    'fantasy.floorball_players.apps.FloorballPlayersConfig',
+    'fantasy.common.apps.CommonConfig',
     # CORS
     'corsheaders',
 ]

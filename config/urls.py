@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/auth/', obtain_auth_token),
     path('api/users/', include('fantasy.users.urls')),
     path('api/teams/', include('fantasy.teams.urls')),
-    path('api/celery/', include('fantasy.floorball_teams.urls'))
+    path('api/celery/teams/', include('fantasy.floorball_teams.urls')),
+    path('api/celery/players/', include('fantasy.floorball_players.urls'))
 ]
