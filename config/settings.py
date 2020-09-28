@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
     # Django REST framework
     'rest_framework',
     'rest_framework.authtoken',
@@ -127,6 +128,13 @@ STATIC_URL = '/static/'
 
 
 # CUSTOM SETTINGS
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'PAGE_SIZE': 10
+}
+
 APPEND_SLASH = False
 
 CORS_ORIGIN_ALLOW_ALL = False

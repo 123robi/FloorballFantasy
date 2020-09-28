@@ -12,4 +12,7 @@ class FloorballPlayer(models.Model):
     penalties = models.PositiveIntegerField()
     plus_minus = models.IntegerField()
 
-    team = models.ForeignKey(FloorballTeam, on_delete=models.CASCADE)
+    team = models.ForeignKey(FloorballTeam, related_name='players', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name

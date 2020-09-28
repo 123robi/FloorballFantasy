@@ -1,7 +1,22 @@
-from django.http import HttpResponse
+from rest_framework import generics, filters
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
-from fantasy.floorball_players.tasks import get_players
+from fantasy.floorball_players.models import FloorballPlayer
+from fantasy.floorball_players.serializer import FloorballPlayerSerializer
 
 
-def index(request):
-    return HttpResponse(get_players())
+class PlayersListView(generics.ListAPIView):
+    queryset = FloorballPlayer.objects.all()
+    serializer_class = FloorballPlayerSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, )
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'team__name']
+
+
+class TopPlayersListView(generics.ListAPIView):
+    queryset = FloorballPlayer.objects.all().order_by('-points')[:10]
+    serializer_class = FloorballPlayerSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, )

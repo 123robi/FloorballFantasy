@@ -6,5 +6,5 @@ from fantasy.floorball_teams import views
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.TeamsListView.as_view()),
 ]

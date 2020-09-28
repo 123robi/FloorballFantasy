@@ -6,5 +6,6 @@ from fantasy.floorball_players import views
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.PlayersListView.as_view()),
+    path('top/', views.TopPlayersListView.as_view()),
 ]

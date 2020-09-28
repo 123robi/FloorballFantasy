@@ -10,3 +10,9 @@ class FloorballTeam(models.Model):
     points = models.PositiveIntegerField()
     image_url = models.URLField(default='')
     team_url = models.URLField(default='')
+
+    class Meta:
+        ordering = ['-points']
+
+    def __str__(self):
+        return self.name
