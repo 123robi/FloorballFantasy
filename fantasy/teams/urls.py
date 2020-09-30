@@ -7,5 +7,5 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('', views.TeamViewSet.as_view()),
-    path('<int:pk>/', views.TeamDetail.as_view()),
+    path('my_team/', views.TeamDetail.as_view()),
 ]

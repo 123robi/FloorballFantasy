@@ -1,10 +1,11 @@
-from rest_framework import generics, mixins
+from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from fantasy.teams.models import Team
 from fantasy.teams.serializer import TeamSerializer
-from fantasy.users.premissions import IsOwner
 
 
 class TeamViewSet(generics.ListAPIView, generics.RetrieveAPIView, generics.CreateAPIView):
@@ -19,11 +20,12 @@ class TeamViewSet(generics.ListAPIView, generics.RetrieveAPIView, generics.Creat
         return self.create(request, *args, **kwargs)
 
 
-class TeamDetail(mixins.UpdateModelMixin, generics.GenericAPIView):
-    queryset = Team.objects.all()
-    serializer_class = TeamSerializer
+class TeamDetail(APIView):
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated, IsOwner)
+    permission_classes = (IsAuthenticated, )
 
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+    def get(self, request):
+        try:
+            return Response(TeamSerializer(Team.objects.filter(user=request.user.id), many=True).data)
+        except Team.DoesNotExist:
+            return Response({'detail': "First you have to create a team!"})

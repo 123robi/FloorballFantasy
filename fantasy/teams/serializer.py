@@ -5,17 +5,23 @@ from fantasy.floorball_players.models import FloorballPlayer
 from fantasy.teams.models import Team
 
 
-class TestSerializer(serializers.ModelSerializer):
+class FloorballPlayerSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
 
     class Meta:
         model = FloorballPlayer
-        fields = ('id', 'name')
-        extra_kwargs = {'name': {'read_only': True}}
+        fields = ('id', 'name', 'games_played', 'points', 'goals', 'assists')
+        extra_kwargs = {
+            'name': {'read_only': True},
+            'games_played': {'read_only': True},
+            'points': {'read_only': True},
+            'goals': {'read_only': True},
+            'assists': {'read_only': True}
+        }
 
 
 class TeamSerializer(serializers.ModelSerializer):
-    players = TestSerializer(many=True)
+    players = FloorballPlayerSerializer(many=True)
 
     class Meta:
         model = Team
