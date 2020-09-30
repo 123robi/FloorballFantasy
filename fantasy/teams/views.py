@@ -7,7 +7,7 @@ from fantasy.teams.serializer import TeamSerializer
 from fantasy.users.premissions import IsOwner
 
 
-class TeamViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, generics.GenericAPIView):
+class TeamViewSet(generics.ListAPIView, generics.RetrieveAPIView, generics.CreateAPIView):
     serializer_class = TeamSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
@@ -17,9 +17,6 @@ class TeamViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, generics.Gener
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
 
 
 class TeamDetail(mixins.UpdateModelMixin, generics.GenericAPIView):

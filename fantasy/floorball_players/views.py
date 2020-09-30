@@ -11,7 +11,7 @@ class PlayersListView(generics.ListAPIView):
     serializer_class = FloorballPlayerSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, )
-    filter_backends = [filters.SearchFilter]
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ['name', 'team__name']
 
 
