@@ -4,7 +4,7 @@ from fantasy.floorball_players.models import FloorballPlayer
 
 
 class FloorballPlayerSerializer(serializers.ModelSerializer):
-    team = serializers.StringRelatedField()
+    floorball_team = serializers.StringRelatedField()
 
     class Meta:
         model = FloorballPlayer
