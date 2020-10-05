@@ -1,10 +1,6 @@
-from django.urls import path
 from rest_framework import routers
 
 from fantasy.floorball_teams import views
 
 router = routers.DefaultRouter()
-
-urlpatterns = [
-    path('', views.TeamsListView.as_view()),
-]
+router.register('floorball_teams', views.TeamsListView, basename='floorball_teams')

@@ -13,16 +13,28 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import debug_toolbar
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
+from fantasy.teams.urls import router as team_router
+from fantasy.users.urls import router as user_router
+from fantasy.floorball_teams.urls import router as floorball_team_router
+from fantasy.floorball_players.urls import router as floorball_player_router
+from fantasy.floorball_goalkeepers.urls import router as floorball_goalie_router
+
+router = routers.DefaultRouter()
+router.registry.extend(team_router.registry)
+router.registry.extend(user_router.registry)
+router.registry.extend(floorball_team_router.registry)
+router.registry.extend(floorball_player_router.registry)
+router.registry.extend(floorball_goalie_router.registry)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', obtain_auth_token),
-    path('api/users/', include('fantasy.users.urls')),
-    path('api/teams/', include('fantasy.teams.urls')),
-    path('api/floorball_teams/', include('fantasy.floorball_teams.urls')),
-    path('api/floorball_players/', include('fantasy.floorball_players.urls')),
-    path('api/floorball_goalies/', include('fantasy.floorball_goalkeepers.urls'))
+    path('api/', include(router.urls)),
+    path('__debug__/', include(debug_toolbar.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

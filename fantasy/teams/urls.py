@@ -1,11 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework import routers
 
 from fantasy.teams import views
 
 router = routers.DefaultRouter()
 
+router.register('teams', views.TeamViewSet, basename='teams')
 urlpatterns = [
-    path('', views.TeamViewSet.as_view()),
-    path('my_team/', views.TeamDetail.as_view()),
+    path('', include(router.urls)),
 ]
