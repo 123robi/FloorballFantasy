@@ -35,12 +35,13 @@ def get_players():
                 player.points = points
                 player.penalties = penalties
                 player.plus_minus = plus_minus
-                player.team = floorball_team
+                player.floorball_team = floorball_team
                 player.save()
             except FloorballPlayer.DoesNotExist:
                 team = FloorballPlayer(
                     name=player_name, games_played=games_played, goals=goals,
-                    assists=assists, points=points, penalties=penalties, plus_minus=plus_minus, team=floorball_team
+                    assists=assists, points=points, penalties=penalties,
+                    plus_minus=plus_minus, floorball_team=floorball_team
                 )
                 team.save()
     return 'DONE'

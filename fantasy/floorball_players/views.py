@@ -12,7 +12,7 @@ class PlayersListView(generics.ListAPIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, )
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
-    search_fields = ['name', 'team__name']
+    search_fields = ['name', 'floorball_team__name']
 
 
 class TopPlayersListView(generics.ListAPIView):

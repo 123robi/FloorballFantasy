@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'fantasy.teams.apps.TeamsConfig',
     'fantasy.floorball_teams.apps.FloorballTeamsConfig',
     'fantasy.floorball_players.apps.FloorballPlayersConfig',
+    'fantasy.floorball_goalkeepers.apps.FloorballGoalkeepersConfig',
     'fantasy.common.apps.CommonConfig',
     # CORS
     'corsheaders',

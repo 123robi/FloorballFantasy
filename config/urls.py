@@ -23,5 +23,6 @@ urlpatterns = [
     path('api/users/', include('fantasy.users.urls')),
     path('api/teams/', include('fantasy.teams.urls')),
     path('api/floorball_teams/', include('fantasy.floorball_teams.urls')),
-    path('api/floorball_players/', include('fantasy.floorball_players.urls'))
+    path('api/floorball_players/', include('fantasy.floorball_players.urls')),
+    path('api/floorball_goalies/', include('fantasy.floorball_goalkeepers.urls'))
 ]

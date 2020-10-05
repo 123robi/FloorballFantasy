@@ -25,7 +25,7 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        fields = ('id', 'name', 'players')
+        fields = ('id', 'name', 'players', 'goalie')
 
     def create(self, validated_data):
         if Team.objects.filter(user=validated_data['user']).count() != 0:
