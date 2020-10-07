@@ -18,7 +18,8 @@ class FloorballPlayerViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     @action(methods=['get'], detail=False)
     def top(self, request):
         return Response(
-            FloorballPlayerSerializer(FloorballPlayer.objects.all().order_by('-points')[:10], many=True).data
+            FloorballPlayerSerializer(FloorballPlayer.objects.all().order_by('-points').prefetch_related(
+                'floorball_team')[:10], many=True).data
         )
 
     @action(methods=['get'], detail=False)
