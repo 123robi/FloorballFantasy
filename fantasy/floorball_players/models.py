@@ -11,6 +11,9 @@ class FloorballPlayer(models.Model):
     assists = models.PositiveIntegerField()
     penalties = models.PositiveIntegerField()
     plus_minus = models.IntegerField()
+    player_url = models.URLField()
+    new_price = models.PositiveIntegerField(default=0)
+    old_price = models.PositiveIntegerField(default=0)
 
     floorball_team = models.ForeignKey(FloorballTeam, related_name='players', on_delete=models.CASCADE)
 

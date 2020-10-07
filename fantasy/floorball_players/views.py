@@ -5,6 +5,7 @@ from rest_framework.response import Response
 
 from fantasy.floorball_players.models import FloorballPlayer
 from fantasy.floorball_players.serializer import FloorballPlayerSerializer
+from fantasy.floorball_players.tasks import set_players_initial_price
 
 
 class FloorballPlayerViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -19,3 +20,8 @@ class FloorballPlayerViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         return Response(
             FloorballPlayerSerializer(FloorballPlayer.objects.all().order_by('-points')[:10], many=True).data
         )
+
+    @action(methods=['get'], detail=False)
+    def get_prices(self, request):
+        set_players_initial_price.delay()
+        return Response('DONE')
