@@ -21,3 +21,7 @@ def find_element(driver, method, element_locator):
 
 def wait_until(driver, method, delay=5):
     WebDriverWait(driver, delay).until(method)
+
+
+def get_parent(element):
+    return element.find_element_by_xpath('..')

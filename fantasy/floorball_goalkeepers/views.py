@@ -5,7 +5,7 @@ from rest_framework.response import Response
 
 from fantasy.floorball_goalkeepers.models import Goalkeeper
 from fantasy.floorball_goalkeepers.serializers import GoalkeeperSerializer
-from fantasy.floorball_goalkeepers.tasks import get_goalies
+from fantasy.floorball_goalkeepers.tasks import get_goalies, set_goalie_initial_price
 
 
 class GoalkeepersListView(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -18,4 +18,9 @@ class GoalkeepersListView(mixins.ListModelMixin, viewsets.GenericViewSet):
     @action(methods=['get'], detail=False)
     def get_goalkeepers_celery(self, request):
         get_goalies.delay()
+        return Response("DONE")
+
+    @action(methods=['get'], detail=False)
+    def get_goalkeepers_initial_price_celery(self, request):
+        set_goalie_initial_price.delay()
         return Response("DONE")
