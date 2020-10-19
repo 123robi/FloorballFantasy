@@ -14,3 +14,14 @@ else:
 https://www.ceskyflorbal.cz/osoba/0609050641 -> Jan baudisch is player not goalkeeper
 
 insert into floorball_players_floorballplayer(name, games_played, points, goals, assists, penalties, plus_minus, floorball_team_id, new_price, old_price, player_url) values ('Jan Baudisch', 2, 1, 1, 0, 2, -5, 36, 100000, 100000, 'https://www.ceskyflorbal.cz/osoba/0609050641')
+
+# Api requests exmaples:
+
+http://localhost:8080/api/teams/
+{
+    "name": "admin_team",
+    "players": [458, 373, 481, 489, 534],
+	"goalie": 3,
+	"isCaptainGoalie": true,
+	"captainId": 3
+}
