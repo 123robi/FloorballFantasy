@@ -3,11 +3,16 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from fantasy.floorball_goalkeepers.models import Goalkeeper
+from fantasy.floorball_players.models import FloorballPlayer
 from fantasy.teams.models import Team
 from fantasy.teams.serializer import TeamCreateSerializer, TeamRetrieveSerializer
 
 
-class TeamViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class TeamViewSet(mixins.CreateModelMixin,
+                  mixins.ListModelMixin,
+                  mixins.RetrieveModelMixin,
+                  mixins.UpdateModelMixin, viewsets.GenericViewSet):
     serializer_class = TeamCreateSerializer
     permission_classes = (IsAuthenticated,)
 
@@ -22,3 +27,20 @@ class TeamViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
                     'players__floorball_team'), many=True).data)
         except Team.DoesNotExist:
             return Response({'detail': "First you have to create a team!"})
+
+    @action(methods=['put'], detail=False)
+    def update_captain(self, request):
+        try:
+            team = Team.objects.filter(user=request.user.id).first()
+        except Team.DoesNotExist:
+            return Response({'detail': "First you have to create a team!"})
+
+        if request.data['isCaptainGoalie']:
+            captain = Goalkeeper.objects.filter(id=request.data['captainId']).first()
+        else:
+            captain = FloorballPlayer.objects.filter(id=request.data['captainId']).first()
+
+        team.captain_object = captain
+        team.captain_object.save()
+        team.save()
+        return Response('Updated')
