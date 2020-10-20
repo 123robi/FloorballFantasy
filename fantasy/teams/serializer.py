@@ -5,6 +5,7 @@ from fantasy.floorball_goalkeepers.models import Goalkeeper
 from fantasy.floorball_players.models import FloorballPlayer
 
 from fantasy.teams.models import Team
+from fantasy.users.serializer import UserSerializer
 
 
 class TeamCreateSerializer(serializers.ModelSerializer):
@@ -43,6 +44,19 @@ class TeamCreateSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         attrs['user'] = self.context['request'].user
         return attrs
+
+
+class TeamListSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    team_price = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Team
+        fields = ['name', 'budget', 'points', 'user', 'team_price']
+        depth = 1
+
+    def get_team_price(self, obj):
+        return sum(player.new_price for player in obj.players.all())
 
 
 class TeamRetrieveSerializer(serializers.ModelSerializer):

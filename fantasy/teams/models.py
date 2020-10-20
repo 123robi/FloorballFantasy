@@ -15,4 +15,5 @@ class Team(models.Model):
     captain_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
     captain_id = models.PositiveIntegerField(null=True)
     captain_object = GenericForeignKey('captain_type', 'captain_id')
+    points = models.PositiveIntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

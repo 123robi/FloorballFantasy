@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from fantasy.floorball_goalkeepers.models import Goalkeeper
 from fantasy.floorball_players.models import FloorballPlayer
 from fantasy.teams.models import Team
-from fantasy.teams.serializer import TeamCreateSerializer, TeamRetrieveSerializer
+from fantasy.teams.serializer import TeamCreateSerializer, TeamRetrieveSerializer, TeamListSerializer
 
 
 class TeamViewSet(mixins.CreateModelMixin,
@@ -17,7 +17,14 @@ class TeamViewSet(mixins.CreateModelMixin,
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self, *args, **kwargs):
+        if self.action == 'list':
+            return Team.objects.order_by('points', 'budget')
         return Team.objects.all().filter(user=self.request.user)
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return TeamListSerializer
+        return super().get_serializer_class()
 
     @action(methods=['get'], detail=False)
     def my_team(self, request):
