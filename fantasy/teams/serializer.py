@@ -60,7 +60,16 @@ class TeamListSerializer(serializers.ModelSerializer):
 
 
 class TeamRetrieveSerializer(serializers.ModelSerializer):
+    team_price = serializers.SerializerMethodField()
+    ranking = serializers.SerializerMethodField()
+
     class Meta:
         model = Team
         exclude = ['user']
         depth = 2
+
+    def get_team_price(self, obj):
+        return sum(player.new_price for player in obj.players.all())
+
+    def get_ranking(self, obj):
+        return obj.ranking()
