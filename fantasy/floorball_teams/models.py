@@ -10,6 +10,8 @@ class FloorballTeam(models.Model):
     points = models.PositiveIntegerField()
     image_url = models.URLField(default='')
     team_url = models.URLField(default='')
+    new_price = models.PositiveIntegerField(default=0)
+    old_price = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ['-points']
