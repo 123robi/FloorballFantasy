@@ -14,7 +14,7 @@ class TeamCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        fields = ['id', 'name', 'players', 'goalie', 'isCaptainGoalie', 'captainId']
+        fields = ['id', 'name', 'players', 'goalie', 'isCaptainGoalie', 'captainId', 'team_attack', 'team_defense']
 
     def create(self, validated_data):
         budget = 1000000

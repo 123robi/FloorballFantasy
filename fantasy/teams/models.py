@@ -6,6 +6,7 @@ from django.db.models import Count
 
 from fantasy.floorball_goalkeepers.models import Goalkeeper
 from fantasy.floorball_players.models import FloorballPlayer
+from fantasy.floorball_teams.models import FloorballTeam
 
 
 class Team(models.Model):
@@ -13,6 +14,8 @@ class Team(models.Model):
     players = models.ManyToManyField(FloorballPlayer)
     budget = models.IntegerField(default=1000000)
     goalie = models.ForeignKey(Goalkeeper, on_delete=models.CASCADE)
+    team_attack = models.ForeignKey(FloorballTeam, on_delete=models.CASCADE, related_name='team_team_attack')
+    team_defense = models.ForeignKey(FloorballTeam, on_delete=models.CASCADE, related_name='team_team_defense')
     captain_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
     captain_id = models.PositiveIntegerField(null=True)
     captain_object = GenericForeignKey('captain_type', 'captain_id')
