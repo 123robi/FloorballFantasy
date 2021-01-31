@@ -12,7 +12,8 @@ from fantasy.teams.serializer import TeamCreateSerializer, TeamRetrieveSerialize
 class TeamViewSet(mixins.CreateModelMixin,
                   mixins.ListModelMixin,
                   mixins.RetrieveModelMixin,
-                  mixins.UpdateModelMixin, viewsets.GenericViewSet):
+                  mixins.UpdateModelMixin,
+                  viewsets.GenericViewSet):
     serializer_class = TeamCreateSerializer
     permission_classes = (IsAuthenticated,)
 
@@ -31,7 +32,8 @@ class TeamViewSet(mixins.CreateModelMixin,
         try:
             return Response(TeamRetrieveSerializer(
                 Team.objects.filter(user=request.user.id).select_related('goalie__floorball_team').prefetch_related(
-                    'players__floorball_team'), many=True).data)
+                    'players__floorball_team').select_related('team_attack').select_related('team_defense'),
+                many=True).data)
         except Team.DoesNotExist:
             return Response({'detail': "First you have to create a team!"})
 
